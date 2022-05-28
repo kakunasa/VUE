@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        *{
+            margin: 20px;
+        }
+        .demo1{
+            height: 80px;
+            background-color: aqua;
+        }
+        .box1{
+            padding: 5px;
+            background-color: beige;
+        }
+        .box2{
+            padding: 5px;
+            background-color: blue;
+        }
+        .list{
+            height: 200px;
+            width: 200px;
+            background-color: blueviolet;
+            overflow: auto;
+        }
+        li{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        
+        <a href="#" @click.prevent="showInfo">click and show info</a>
+        
+        <div class="demo1" @click="showInfo">
+            <button @click.stop="showInfo">click and show info</button>
+        </div>
+        
+        <button @click.once="showInfo">click and show info</button>
+
+        <div class="box1" @click.capture="showMsg(1)">
+            div1
+            <div class="box2" @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+
+        <div class="demo1" @click.self="showInfo">
+            <button @click="showInfo">click and show info</button>
+        </div>
+
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+</body>
+<script>
+    const vm ={
+        data(){
+            return{
+                name:'guo',
+                address:'1-1-1'
+            }
+        },
+        methods:{
+            showInfo(event){
+                // event.preventDefault()
+                // event.stopPropagation()
+                alert("wellcome")
+                console.log(event.target)
+            },
+            showMsg(number){
+                console.log(number)
+            },
+            demo(){
+                for(let i=0;i<10000;i++){
+                    console.log("#")
+                }
+                console.log("累坏了")
+            }
+        }
+    }
+    Vue.createApp(vm).mount("#root")
+</script>
+</html>

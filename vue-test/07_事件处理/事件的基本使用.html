@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>wellcome to {{name}}</h2>
+        <button v-on:click="showInfo">click and show message</button>
+        <button @click="showInfo2(66,$event)">click and show message2</button>
+    </div>
+</body>
+<script>
+    const vm ={
+        data(){
+            return{
+                name:'guo',
+                address:'1-1-1'
+            }
+        },
+        methods:{
+            showInfo(event){
+                alert("wellcome")
+                console.log(event.target.innerText)
+                console.log(this)
+            },
+            showInfo2(number,a){
+                alert("wellcome")
+                console.log(number)
+                console.log(a)
+            }
+        }
+    }
+    Vue.createApp(vm).mount("#root")
+</script>
+</html>
