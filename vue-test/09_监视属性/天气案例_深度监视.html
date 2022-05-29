@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+        <hr>
+        <h3>the value of a is:{{numbers.a}}</h3>
+        <button @click="numbers.a++">click and let a plus 1</button>
+        <hr>
+        <h3>the value of b is:{{numbers.b}}</h3>
+        <button @click="numbers.b++">click and let b plus 1</button>
+    </div>
+</body>
+<script>
+    const vm ={
+        data() {
+            return {
+               isHot:true,
+               numbers:{
+                   a:1,
+                   b:1
+               }     
+            }
+        },
+        computed:{
+            info(){
+                return this.isHot ? "炎热" : "凉爽"
+            }
+        },
+        methods: {
+            changeWeather(){
+                this.isHot = ! this.isHot
+            }
+        },
+        watch:{
+            isHot:{
+                immediate:true,
+                handler(newvalue,oldvalue){
+                    console.log(newvalue)
+                    console.log(oldvalue)
+                }
+            },
+            'numbers.a':{
+                handler(){
+                    console.log("a has been changed")
+                }
+            },
+            numbers:{
+                deep:true,
+                handler(){
+                    console.log("numbers has been changed")
+                }
+            }
+        }
+    }
+    Vue.createApp(vm).mount("#root")
+</script>
+</html>
