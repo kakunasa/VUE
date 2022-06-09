@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <School></School>
+        <hr>
+        <Student></Student>
+        <hr>
+        <hello></hello>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false
+    //创建school组件
+    const school = Vue.extend({
+        template:`
+        <div>
+            <h2>name:{{schoolName}}</h2>
+            <h2>address:{{address}}</h2>
+            <button @click="showName">click and show name</button>
+        </div>
+        `,
+        data() {
+            return {
+                schoolName: 'sophia',
+                address: 'tokyo',
+            }
+        },
+        methods: {
+            showName(){
+                alert(this.schoolName)
+            }
+        },
+    })
+    //创建student组件
+    const student = Vue.extend({
+        template:`
+        <div>
+            <h2>name:{{studentName}}</h2>
+            <h2>age:{{age}}</h2>
+        </div>
+        `,
+        data() {
+            return {
+                studentName:'gwc',
+                age:'24'
+            }
+        },
+    })
+
+    const hello = Vue.extend({
+        template:`
+        <div>
+            <h2>hello {{name}}</h2>    
+        </div>
+        `,
+        data(){
+            return{
+                name:'gwc'
+            }
+        }
+    })
+    //注册组件(全局注册)
+    Vue.component('hello',hello)
+    //创建vm
+    new Vue({
+        el:'#root',
+        //注册组件(局部注册)
+        components:{
+            School:school,
+            Student:student
+        }
+    })
+</script>
+
+</html>
